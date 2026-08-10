@@ -1,0 +1,26 @@
+spark version 3.5.0
+
+The downstream team is using the data present in bronze layer to load data into their standard tables.
+Create 3 spark jobs using autoloader to load the data into bronze layer.
+
+Upstream is sending files in 3 different file path.
+
+1. workspace/landing/bronze_layer/sat_nav/data
+2. workspace/landing/raw_data/sat_comm/data
+3. workspace/landing/data_lake/telecom/data
+
+=======================================================================================
+
+1. The files landing in workspace/landing/bronze_layer/sat_nav/data
+   will arrive every 2 minutes (micro-batch). As soon as the file arrives the autoloader should pick up the files from the location.
+   The data will be loaded into table: bronze_layer.sat_nav
+
+2. The files landing in workspace/landing/raw_data/sat_comm/data
+    will arrive once in a day and shall trigger at a praticular time. This is a batch job which runs daily.
+    The data will be loaded into table: raw_data.sat_comm
+
+3. The files landing in workspace/landing/data_lake/telecom/data
+    will arrive every 40 seconds processingTime = 40s.
+    The data will be loaded into table: data_lake.telecom
+
+The code shall be in a python file and not in databricks notebook.
